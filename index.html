@@ -1,24 +1,207 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Conecta — sua comunidade</title>
 <style>
-*{box-sizing:border-box}body{margin:0;background:#f4f6fc;color:#18213a;font:15px system-ui,sans-serif}.top{background:#3457d5;color:white;padding:20px 6%;font-size:24px;font-weight:800}.wrap{max-width:1050px;margin:28px auto;padding:0 16px;display:grid;grid-template-columns:190px 1fr 230px;gap:18px}.panel{background:white;border:1px solid #e7eaf2;border-radius:16px;padding:18px;margin-bottom:14px}.nav button,.tabs button,.actions button{display:block;width:100%;border:0;background:transparent;text-align:left;padding:12px;border-radius:9px;color:#26365f;font-weight:650}.nav button:hover,.tabs button:hover{background:#e8edff}.muted{color:#778198;font-size:13px}h1{font-size:26px;margin:0 0 6px}.compose{display:flex;gap:10px}.compose input{flex:1;min-width:0;padding:13px;border:1px solid #e1e5ef;border-radius:10px}.primary{background:#3457d5!important;color:white!important;border:0;padding:11px 16px;border-radius:10px;font-weight:700}.post{line-height:1.6}.post strong{display:block}.post p{margin:12px 0}.actions{display:flex;gap:14px;border-top:1px solid #eee;padding-top:10px}.actions button{width:auto;padding:5px 0;cursor:pointer}.tag{color:#3457d5;font-size:12px;font-weight:700}.right a{display:block;padding:12px;margin-top:10px;border-radius:10px;background:#f1f3fa;color:#26365f;text-decoration:none;font-weight:700}.footer{font-size:11px;color:#8992a6;line-height:1.6}@media(max-width:760px){.wrap{display:block}.nav,.right{display:none}.top{padding:16px}.panel{padding:15px}}
-</style></head>
-<body><header class="top">c. conecta</header>
-<div class="wrap">
-<aside class="panel nav"><b>MENU</b><button>⌂ Início</button><button>⌕ Explorar</button><button>◎ Comunidades</button><button>✉ Mensagens</button><button>▱ Salvos</button></aside>
-<main><section style="margin:4px 0 18px"><h1>Seu espaço, suas ideias.</h1><div class="muted">Converse, compartilhe e descubra pessoas com interesses em comum.</div></section>
-<section class="panel"><div class="compose"><input id="postInput" maxlength="280" placeholder="O que você gostaria de compartilhar?"><button class="primary" id="publish">Publicar</button></div><p class="muted">Seja gentil. Respeite a comunidade.</p></section>
-<div class="tabs actions"><button>Para você</button><button>Seguindo</button><button>Recentes</button></div>
-<section id="posts">
-<article class="panel post"><strong>Marina Alves · há 12 min</strong><p>Comecei a organizar minhas ideias para um projeto novo e percebi como ajuda trocar referências com outras pessoas. Qual ferramenta vocês mais gostam para tirar ideias do papel?</p><span class="tag">#criatividade</span><div class="actions"><button class="like">♡ 18 curtidas</button><button>◯ Comentar</button><button>↗ Compartilhar</button></div></article>
-<article class="panel post"><strong>Rafael Lima · há 38 min</strong><p>Aprender algo novo fica mais leve quando a gente faz junto. Estou montando uma lista de projetos para iniciantes. Alguém tem uma sugestão?</p><span class="tag">#aprendizado</span><div class="actions"><button class="like">♡ 9 curtidas</button><button>◯ Comentar</button><button>↗ Compartilhar</button></div></article>
-</section></main>
-<aside class="right"><section class="panel"><b>Assuntos em alta</b><p>#Design · 2,4 mil posts</p><p>#Tecnologia · 1,8 mil posts</p><p>#Música · 980 posts</p><p>#Estudos · 760 posts</p></section><section class="panel"><b>Minhas redes sociais</b><a href="https://www.youtube.com/@bifex69" target="_blank" rel="noopener">▶ Meu canal no YouTube</a><a href="https://www.tiktok.com/@bifex69?_r=1&_t=ZS-9AyHviTcxDY" target="_blank" rel="noopener">♪ Meu TikTok</a></section><p class="footer">Conecta é um protótipo demonstrativo. Cuide da sua privacidade e trate todos com respeito. © 2026 Conecta</p></aside>
+:root {
+  --site-primary: #3457D5;
+  --site-secondary: #E8EDFF;
+  --site-background: #F4F6FC;
+  --site-on-primary: #FFFFFF;
+  --site-on-secondary: #1D347F;
+  --site-on-background: #18213A;
+  --site-font-body: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --site-font-heading: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --site-heading-scale: 1;
+  --site-spacing-scale: 1;
+  --site-radius-scale: 1;
+  --site-decoration-opacity: 1;
+  color-scheme: light dark;
+}
+* { box-sizing: border-box; }
+body { margin: 0; font-family: var(--site-font-body); background: var(--site-background); color: var(--site-on-background); }
+#app { min-height: 100vh; width: 100%; background-color: var(--site-background); color: var(--site-on-background); border-radius: 0; }
+.topbar { height: 72px; display:flex; align-items:center; justify-content:space-between; padding: 0 5vw; background: var(--site-primary); color: var(--site-on-primary); }
+.brand { display:flex; align-items:center; gap:10px; font-family:var(--site-font-heading); font-size:calc(23px * var(--site-heading-scale)); font-weight:800; letter-spacing:-.8px; }
+.brand-mark { width:34px; height:34px; display:grid; place-items:center; border-radius:11px; background:rgba(255,255,255,.18); font-weight:900; }
+.top-links { display:flex; align-items:center; gap:24px; font-size:14px; color:rgba(255,255,255,.88); }
+.top-links a { color:inherit; text-decoration:none; }
+.search-box { width:min(34vw,390px); display:flex; align-items:center; gap:9px; padding:10px 14px; border:1px solid rgba(255,255,255,.28); border-radius:999px; background:rgba(255,255,255,.13); color:rgba(255,255,255,.8); }
+.search-box input { width:100%; min-width:0; border:0; outline:0; background:transparent; color:white; font:14px var(--site-font-body); }
+.search-box input::placeholder { color:rgba(255,255,255,.75); }
+.profile { width:36px; height:36px; display:grid; place-items:center; border-radius:50%; background:#D8E2FF; color:#243B91; font-weight:800; }
+.profile-photo,.avatar-photo { background-image:url('profile.jpg'); background-position:center; background-size:cover; color:transparent!important; overflow:hidden; }
+.layout { max-width:1160px; margin:32px auto; padding:0 22px; display:grid; grid-template-columns:220px minmax(0, 1fr) 250px; gap:24px; }
+.panel { background: light-dark(#FFFFFF,#171D2D); border:1px solid light-dark(#E7EAF2,#2B3449); border-radius:calc(18px * var(--site-radius-scale)); }
+.sidebar { padding:18px 14px; height:max-content; }
+.side-label { color:light-dark(#7A849B,#A3AEC5); font-size:11px; font-weight:800; letter-spacing:1.2px; padding:8px 10px; }
+.nav-item { width:100%; border:0; background:transparent; color:inherit; padding:11px 10px; text-align:left; border-radius:11px; display:flex; align-items:center; gap:11px; font:600 14px var(--site-font-body); cursor:pointer; }
+.nav-item.active,.nav-item:hover { background:var(--site-secondary); color:var(--site-on-secondary); }
+.nav-icon { width:20px; text-align:center; font-size:17px; }
+.main { min-width:0; }
+.welcome { margin:2px 0 20px; padding:25px 24px; border-radius:20px; color:white; background:radial-gradient(circle at 88% 15%,rgba(255,255,255,.25),transparent 25%),linear-gradient(120deg,#253f9d,#4268e8 62%,#6685f2); box-shadow:0 12px 28px rgba(52,87,213,.18); }
+.welcome .muted { color:rgba(255,255,255,.82); }
+h1 { font:800 calc(27px * var(--site-heading-scale))/1.2 var(--site-font-heading); letter-spacing:-1px; margin:0 0 6px; }
+.muted { color:light-dark(#778198,#A4AEC2); font-size:14px; }
+.composer { padding:18px; margin-bottom:18px; }
+.composer-head { display:flex; align-items:center; gap:12px; }
+.avatar { flex:0 0 40px; height:40px; width:40px; border-radius:50%; display:grid; place-items:center; background:#DDE5FF; color:#2C469F; font-weight:800; }
+.composer input { min-width:0; flex:1; border:1px solid light-dark(#E5E9F2,#303A50); border-radius:12px; background:light-dark(#F8F9FC,#20283A); color:inherit; padding:13px 14px; font:14px var(--site-font-body); outline:none; }
+.composer input:focus { border-color:var(--site-primary); }
+.composer-actions { display:flex; justify-content:space-between; align-items:center; margin:14px 2px 0 52px; }
+.small-note { font-size:12px; color:light-dark(#8A94A8,#A4AEC2); }
+.primary-btn { border:0; border-radius:11px; background:var(--site-primary); color:var(--site-on-primary); font:700 13px var(--site-font-body); padding:10px 16px; cursor:pointer; }
+.primary-btn:hover { filter:brightness(1.08); }
+.feed-tabs { display:flex; gap:18px; border-bottom:1px solid light-dark(#E2E6EF,#30394D); margin-bottom:16px; }
+.feed-tabs button { border:0; background:none; color:light-dark(#7A8499,#A4AEC2); padding:0 2px 12px; font:700 13px var(--site-font-body); cursor:pointer; }
+.feed-tabs button.selected { color:var(--site-primary); border-bottom:2px solid var(--site-primary); }
+.post { padding:18px; margin-bottom:14px; transition:transform .18s ease,box-shadow .18s ease; }
+.post:hover { transform:translateY(-2px); box-shadow:0 10px 26px rgba(30,48,100,.08); }
+.post-top { display:flex; align-items:center; gap:11px; }
+.post-meta { min-width:0; flex:1; }
+.post-name { font-size:14px; font-weight:800; }
+.post-time { color:light-dark(#8A94A8,#A4AEC2); font-size:12px; margin-top:3px; }
+.post-menu { color:light-dark(#929BB0,#A4AEC2); letter-spacing:2px; }
+.post p { font-size:14px; line-height:1.65; margin:16px 0; color:light-dark(#3C465D,#D4D9E5); }
+.post-tag { display:inline-block; color:var(--site-on-secondary); background:var(--site-secondary); border-radius:7px; padding:5px 8px; font-size:11px; font-weight:700; }
+.post-actions { display:flex; gap:20px; border-top:1px solid light-dark(#EDF0F5,#30394D); padding-top:13px; }
+.action { border:0; background:none; color:light-dark(#78839A,#A4AEC2); font:600 12px var(--site-font-body); cursor:pointer; padding:3px 0; }
+.action.liked { color:#D34B75; }
+.right-col { display:flex; flex-direction:column; gap:16px; }
+.widget { padding:18px; }
+.widget h3 { margin:0 0 15px; font-size:14px; }
+.topic { display:flex; justify-content:space-between; gap:8px; padding:9px 0; border-bottom:1px solid light-dark(#EDF0F5,#30394D); font-size:12px; }
+.topic:last-child { border:0; }
+.topic span:last-child { color:light-dark(#929BB0,#A4AEC2); }
+.person { display:flex; align-items:center; gap:9px; margin:12px 0; }
+.person .avatar { width:32px; height:32px; flex-basis:32px; font-size:11px; }
+.person-info { flex:1; min-width:0; }
+.person-info strong { display:block; font-size:12px; }
+.person-info small { color:light-dark(#8A94A8,#A4AEC2); font-size:11px; }
+.follow { border:1px solid light-dark(#DCE3F4,#3A4660); background:transparent; color:var(--site-primary); border-radius:8px; padding:6px 9px; font:700 11px var(--site-font-body); cursor:pointer; }
+.social-link { display:flex; align-items:center; gap:10px; padding:11px 12px; margin-top:10px; border-radius:12px; background:light-dark(#FFF0F0,#35232A); color:light-dark(#B42332,#FF8994); text-decoration:none; font-size:13px; font-weight:800; }
+.social-link:hover { filter:brightness(.97); }
+.social-icon { width:30px; height:30px; display:grid; place-items:center; border-radius:9px; background:#E62117; color:#FFFFFF; font-size:14px; }
+.social-link.tiktok { background:light-dark(#F1F0F8,#282735); color:light-dark(#24212E,#F2F0FA); }
+.social-link.tiktok .social-icon { background:#17151F; color:#FFFFFF; }
+.footer { color:light-dark(#929BB0,#8793AA); font-size:11px; line-height:1.7; padding:0 4px; }
+.empty { text-align:center; padding:35px 16px; color:light-dark(#7A8499,#A4AEC2); font-size:14px; }
+.toast { position:fixed; bottom:20px; left:50%; transform:translateX(-50%); background:#17213B; color:white; padding:11px 16px; border-radius:10px; font-size:13px; opacity:0; pointer-events:none; transition:opacity .2s; }
+.toast.show { opacity:1; }
+@media (prefers-color-scheme:dark) { .topbar { background:#263D91; } }
+@media (max-width:900px) { .layout { grid-template-columns:190px minmax(0,1fr); } .right-col { display:none; } }
+@media (max-width:620px) { .topbar { height:62px; padding:0 14px; gap:10px; } .top-links { gap:10px; } .top-links a { display:none; } .search-box { width:auto; flex:1; padding:9px 12px; } .search-box input { font-size:12px; } .layout { display:block; margin:18px auto; padding:0 14px; } .sidebar { display:flex; overflow:auto; gap:4px; padding:8px; margin-bottom:20px; } .side-label { display:none; } .nav-item { width:auto; white-space:nowrap; padding:10px 12px; } .nav-item span:last-child { display:none; } h1 { font-size:24px; } .welcome { padding:22px 18px; } .composer,.post { padding:15px; } .composer-actions { margin-left:0; } }
+</style>
+</head>
+<body>
+<div id="app">
+  <header class="topbar">
+    <div class="brand"><span class="brand-mark">c.</span> conecta</div>
+    <label class="search-box"><span>⌕</span><input id="siteSearch" type="search" placeholder="Pesquisar no Conecta" aria-label="Pesquisar publicações"></label>
+    <nav class="top-links"><a href="#feed">Explorar</a><a href="#comunidade">Comunidades</a><a href="#sobre">Sobre</a><div class="profile profile-photo" role="img" aria-label="Foto de perfil"></div></nav>
+  </header>
+  <div class="layout">
+    <aside class="panel sidebar">
+      <div class="side-label">MENU</div>
+      <button class="nav-item active" data-nav="Início"><span class="nav-icon">⌂</span><span>Início</span></button>
+      <button class="nav-item" data-nav="Explorar"><span class="nav-icon">⌕</span><span>Explorar</span></button>
+      <button class="nav-item" data-nav="Comunidades"><span class="nav-icon">◎</span><span>Comunidades</span></button>
+      <button class="nav-item" data-nav="Mensagens"><span class="nav-icon">✉</span><span>Mensagens</span></button>
+      <button class="nav-item" data-nav="Salvos"><span class="nav-icon">▱</span><span>Salvos</span></button>
+    </aside>
+    <main class="main" id="feed">
+      <div class="welcome"><h1>Seu espaço, suas ideias.</h1><div class="muted">Converse, compartilhe e descubra pessoas com interesses em comum.</div></div>
+      <section class="panel composer">
+        <div class="composer-head"><div class="avatar avatar-photo" role="img" aria-label="Sua foto de perfil"></div><input id="postInput" maxlength="280" placeholder="O que você gostaria de compartilhar?" aria-label="Escreva uma publicação"></div>
+        <div class="composer-actions"><span class="small-note">Seja gentil. Respeite a comunidade.</span><button class="primary-btn" id="publish">Publicar</button></div>
+      </section>
+      <div class="feed-tabs"><button class="selected" data-filter="all">Para você</button><button data-filter="following">Seguindo</button><button data-filter="recent">Recentes</button></div>
+      <section id="posts" aria-live="polite">
+        <article class="panel post" data-kind="community">
+          <div class="post-top"><div class="avatar">MA</div><div class="post-meta"><div class="post-name">Marina Alves</div><div class="post-time">há 12 min · Comunidade Criativa</div></div><span class="post-menu">•••</span></div>
+          <p>Comecei a organizar minhas ideias para um projeto novo e percebi como ajuda trocar referências com outras pessoas. Qual ferramenta vocês mais gostam para tirar ideias do papel?</p>
+          <span class="post-tag">#criatividade</span>
+          <div class="post-actions"><button class="action like">♡ <span>18 curtidas</span></button><button class="action comment">◯ Comentar</button><button class="action share">↗ Compartilhar</button></div>
+        </article>
+        <article class="panel post" data-kind="community">
+          <div class="post-top"><div class="avatar" style="background:#DDF3E9;color:#23684C">RL</div><div class="post-meta"><div class="post-name">Rafael Lima</div><div class="post-time">há 38 min · Tecnologia</div></div><span class="post-menu">•••</span></div>
+          <p>Pequena lembrança do dia: aprender algo novo fica mais leve quando a gente faz junto. Estou montando uma lista de projetos para iniciantes. Alguém tem uma sugestão?</p>
+          <span class="post-tag">#aprendizado</span>
+          <div class="post-actions"><button class="action like">♡ <span>9 curtidas</span></button><button class="action comment">◯ Comentar</button><button class="action share">↗ Compartilhar</button></div>
+        </article>
+      </section>
+    </main>
+    <aside class="right-col">
+      <section class="panel widget" id="comunidade"><h3>Assuntos em alta</h3><div class="topic"><strong>#Design</strong><span>2,4 mil posts</span></div><div class="topic"><strong>#Tecnologia</strong><span>1,8 mil posts</span></div><div class="topic"><strong>#Música</strong><span>980 posts</span></div><div class="topic"><strong>#Estudos</strong><span>760 posts</span></div></section>
+      <section class="panel widget"><h3>Comunidade em destaque</h3><div class="person"><div class="avatar">DC</div><div class="person-info"><strong>Design & Criação</strong><small>Espaço para ideias visuais</small></div></div><div class="person"><div class="avatar" style="background:#FBE8D9;color:#92522D">LP</div><div class="person-info"><strong>Leitura em Pauta</strong><small>Livros e boas conversas</small></div></div><button class="follow" id="discover">Explorar comunidades</button></section>
+      <section class="panel widget"><h3>Minhas redes sociais</h3><a class="social-link" href="https://www.youtube.com/@bifex69" target="_blank" rel="noopener noreferrer"><span class="social-icon">▶</span><span>Meu canal no YouTube</span></a><a class="social-link tiktok" href="https://www.tiktok.com/@bifex69?_r=1&amp;_t=ZS-9AyHviTcxDY" target="_blank" rel="noopener noreferrer"><span class="social-icon">♪</span><span>Meu TikTok</span></a></section>
+      <div class="footer" id="sobre">Conecta é um protótipo demonstrativo.<br>Cuide da sua privacidade e trate todos com respeito.<br>© 2026 Conecta</div>
+    </aside>
+  </div>
 </div>
+<div class="toast" id="toast" role="status"></div>
 <script>
-document.getElementById('publish').addEventListener('click',()=>{const i=document.getElementById('postInput'),v=i.value.trim();if(!v){alert('Escreva algo antes de publicar.');return}const a=document.createElement('article');a.className='panel post';const s=document.createElement('strong');s.textContent='Você · agora';const p=document.createElement('p');p.textContent=v;a.append(s,p);document.getElementById('posts').prepend(a);i.value='';});
-document.getElementById('posts').addEventListener('click',e=>{if(e.target.classList.contains('like')){let n=Number((e.target.textContent.match(/\d+/)||['0'])[0]);e.target.textContent=e.target.textContent.includes('♥')?'♡ '+(n-1)+' curtidas':'♥ '+(n+1)+' curtidas';}});
-</script></body></html>
+const toast = document.getElementById('toast');
+let toastTimer;
+function notify(message) {
+  toast.textContent = message;
+  toast.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => toast.classList.remove('show'), 2200);
+}
+document.getElementById('publish').addEventListener('click', () => {
+  const input = document.getElementById('postInput');
+  const value = input.value.trim();
+  if (!value) { notify('Escreva algo antes de publicar.'); input.focus(); return; }
+  const article = document.createElement('article');
+  article.className = 'panel post';
+  article.dataset.kind = 'mine';
+  const top = document.createElement('div');
+  top.className = 'post-top';
+  top.innerHTML = '<div class="avatar avatar-photo" role="img" aria-label="Sua foto de perfil"></div><div class="post-meta"><div class="post-name">Você</div><div class="post-time">agora · Minha publicação</div></div><span class="post-menu">•••</span>';
+  const paragraph = document.createElement('p');
+  paragraph.textContent = value;
+  const actions = document.createElement('div');
+  actions.className = 'post-actions';
+  actions.innerHTML = '<button class="action like">♡ <span>0 curtidas</span></button><button class="action comment">◯ Comentar</button><button class="action share">↗ Compartilhar</button>';
+  article.append(top, paragraph, actions);
+  document.getElementById('posts').prepend(article);
+  input.value = '';
+  notify('Publicação adicionada a esta demonstração!');
+});
+document.getElementById('posts').addEventListener('click', event => {
+  const button = event.target.closest('button');
+  if (!button) return;
+  if (button.classList.contains('like')) {
+    const liked = button.classList.toggle('liked');
+    const count = button.querySelector('span');
+    const number = Number((count.textContent.match(/\d+/) || ['0'])[0]) + (liked ? 1 : -1);
+    count.textContent = number + (number === 1 ? ' curtida' : ' curtidas');
+    button.firstChild.textContent = liked ? '♥ ' : '♡ ';
+  } else if (button.classList.contains('comment')) notify('Comentários estarão disponíveis na próxima versão.');
+  else if (button.classList.contains('share')) notify('Compartilhamento estará disponível na próxima versão.');
+});
+document.getElementById('siteSearch').addEventListener('input', event => {
+  const term = event.target.value.trim().toLocaleLowerCase('pt-BR');
+  document.querySelectorAll('#posts .post').forEach(post => {
+    post.hidden = term !== '' && !post.textContent.toLocaleLowerCase('pt-BR').includes(term);
+  });
+});
+document.querySelectorAll('.feed-tabs button').forEach(button => button.addEventListener('click', () => {
+  document.querySelectorAll('.feed-tabs button').forEach(item => item.classList.remove('selected'));
+  button.classList.add('selected');
+  if (button.dataset.filter === 'following') notify('Aqui aparecerão publicações de perfis que você segue.');
+  else if (button.dataset.filter === 'recent') notify('Você está vendo as publicações mais recentes.');
+  else notify('Feed Para você selecionado.');
+}));
+document.querySelectorAll('.nav-item').forEach(button => button.addEventListener('click', () => {
+  document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
+  button.classList.add('active');
+  if (button.dataset.nav !== 'Início') notify(button.dataset.nav + ' será construído na próxima etapa.');
+}));
+document.getElementById('discover').addEventListener('click', () => notify('A área de comunidades será construída na próxima etapa.'));
+</script>
+</body>
+</html>
