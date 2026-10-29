@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Conecta — sua comunidade</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#f4f6fc;color:#18213a;font:15px system-ui,sans-serif}.top{background:#3457d5;color:white;padding:20px 6%;font-size:24px;font-weight:800}.wrap{max-width:1050px;margin:28px auto;padding:0 16px;display:grid;grid-template-columns:190px 1fr 230px;gap:18px}.panel{background:white;border:1px solid #e7eaf2;border-radius:16px;padding:18px;margin-bottom:14px}.nav button,.tabs button,.actions button{display:block;width:100%;border:0;background:transparent;text-align:left;padding:12px;border-radius:9px;color:#26365f;font-weight:650}.nav button:hover,.tabs button:hover{background:#e8edff}.muted{color:#778198;font-size:13px}h1{font-size:26px;margin:0 0 6px}.compose{display:flex;gap:10px}.compose input{flex:1;min-width:0;padding:13px;border:1px solid #e1e5ef;border-radius:10px}.primary{background:#3457d5!important;color:white!important;border:0;padding:11px 16px;border-radius:10px;font-weight:700}.post{line-height:1.6}.post strong{display:block}.post p{margin:12px 0}.actions{display:flex;gap:14px;border-top:1px solid #eee;padding-top:10px}.actions button{width:auto;padding:5px 0;cursor:pointer}.tag{color:#3457d5;font-size:12px;font-weight:700}.right a{display:block;padding:12px;margin-top:10px;border-radius:10px;background:#f1f3fa;color:#26365f;text-decoration:none;font-weight:700}.footer{font-size:11px;color:#8992a6;line-height:1.6}@media(max-width:760px){.wrap{display:block}.nav,.right{display:none}.top{padding:16px}.panel{padding:15px}}
+</style></head>
+<body><header class="top">c. conecta</header>
+<div class="wrap">
+<aside class="panel nav"><b>MENU</b><button>⌂ Início</button><button>⌕ Explorar</button><button>◎ Comunidades</button><button>✉ Mensagens</button><button>▱ Salvos</button></aside>
+<main><section style="margin:4px 0 18px"><h1>Seu espaço, suas ideias.</h1><div class="muted">Converse, compartilhe e descubra pessoas com interesses em comum.</div></section>
+<section class="panel"><div class="compose"><input id="postInput" maxlength="280" placeholder="O que você gostaria de compartilhar?"><button class="primary" id="publish">Publicar</button></div><p class="muted">Seja gentil. Respeite a comunidade.</p></section>
+<div class="tabs actions"><button>Para você</button><button>Seguindo</button><button>Recentes</button></div>
+<section id="posts">
+<article class="panel post"><strong>Marina Alves · há 12 min</strong><p>Comecei a organizar minhas ideias para um projeto novo e percebi como ajuda trocar referências com outras pessoas. Qual ferramenta vocês mais gostam para tirar ideias do papel?</p><span class="tag">#criatividade</span><div class="actions"><button class="like">♡ 18 curtidas</button><button>◯ Comentar</button><button>↗ Compartilhar</button></div></article>
+<article class="panel post"><strong>Rafael Lima · há 38 min</strong><p>Aprender algo novo fica mais leve quando a gente faz junto. Estou montando uma lista de projetos para iniciantes. Alguém tem uma sugestão?</p><span class="tag">#aprendizado</span><div class="actions"><button class="like">♡ 9 curtidas</button><button>◯ Comentar</button><button>↗ Compartilhar</button></div></article>
+</section></main>
+<aside class="right"><section class="panel"><b>Assuntos em alta</b><p>#Design · 2,4 mil posts</p><p>#Tecnologia · 1,8 mil posts</p><p>#Música · 980 posts</p><p>#Estudos · 760 posts</p></section><section class="panel"><b>Minhas redes sociais</b><a href="https://www.youtube.com/@bifex69" target="_blank" rel="noopener">▶ Meu canal no YouTube</a><a href="https://www.tiktok.com/@bifex69?_r=1&_t=ZS-9AyHviTcxDY" target="_blank" rel="noopener">♪ Meu TikTok</a></section><p class="footer">Conecta é um protótipo demonstrativo. Cuide da sua privacidade e trate todos com respeito. © 2026 Conecta</p></aside>
+</div>
+<script>
+document.getElementById('publish').addEventListener('click',()=>{const i=document.getElementById('postInput'),v=i.value.trim();if(!v){alert('Escreva algo antes de publicar.');return}const a=document.createElement('article');a.className='panel post';const s=document.createElement('strong');s.textContent='Você · agora';const p=document.createElement('p');p.textContent=v;a.append(s,p);document.getElementById('posts').prepend(a);i.value='';});
+document.getElementById('posts').addEventListener('click',e=>{if(e.target.classList.contains('like')){let n=Number((e.target.textContent.match(/\d+/)||['0'])[0]);e.target.textContent=e.target.textContent.includes('♥')?'♡ '+(n-1)+' curtidas':'♥ '+(n+1)+' curtidas';}});
+</script></body></html>
